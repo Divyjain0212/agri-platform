@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Crop</th>
+                <th>Price</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for price in MarketPrice %}
+            <tr>
+                <td>
+                    <a href = "{% url "market:detail" price.id %}">{{price.crop}}
+                </td>
+                <td>{{price.price}}</td>
+                <td>{{price.location}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>   
+    </table>
+{% endblock  %}

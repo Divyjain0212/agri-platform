@@ -1,0 +1,109 @@
+# CloudWatch Exporter Configuration
+# This file configures the CloudWatch exporter to scrape metrics from AWS CloudWatch
+
+# region: AWS region
+# metrics: CloudWatch metrics to export
+# dimensions: Dimensions to filter metrics
+
+ecs:
+  - aws_namespace: AWS/ECS
+    aws_metric_name: CPUUtilization
+    aws_dimensions:
+      ClusterName: agri-platform-cluster
+      ServiceName: agri-platform-service
+    period_seconds: 60
+    range_seconds: 300
+    set_timestamp: false
+    metric_descriptors:
+      - dimensions:
+          - ClusterName
+          - ServiceName
+        name: ecs_cpu_utilization
+
+  - aws_namespace: AWS/ECS
+    aws_metric_name: MemoryUtilization
+    aws_dimensions:
+      ClusterName: agri-platform-cluster
+      ServiceName: agri-platform-service
+    period_seconds: 60
+    range_seconds: 300
+    set_timestamp: false
+    metric_descriptors:
+      - dimensions:
+          - ClusterName
+          - ServiceName
+        name: ecs_memory_utilization
+
+rds:
+  - aws_namespace: AWS/RDS
+    aws_metric_name: CPUUtilization
+    aws_dimensions:
+      DBInstanceIdentifier: agri-platform-db
+    period_seconds: 60
+    range_seconds: 300
+    set_timestamp: false
+    metric_descriptors:
+      - dimensions:
+          - DBInstanceIdentifier
+        name: rds_cpu_utilization
+
+  - aws_namespace: AWS/RDS
+    aws_metric_name: DatabaseConnections
+    aws_dimensions:
+      DBInstanceIdentifier: agri-platform-db
+    period_seconds: 60
+    range_seconds: 300
+    set_timestamp: false
+    metric_descriptors:
+      - dimensions:
+          - DBInstanceIdentifier
+        name: rds_connections
+
+  - aws_namespace: AWS/RDS
+    aws_metric_name: FreeableMemory
+    aws_dimensions:
+      DBInstanceIdentifier: agri-platform-db
+    period_seconds: 60
+    range_seconds: 300
+    set_timestamp: false
+    metric_descriptors:
+      - dimensions:
+          - DBInstanceIdentifier
+        name: rds_freeable_memory
+
+alb:
+  - aws_namespace: AWS/ApplicationELB
+    aws_metric_name: TargetResponseTime
+    aws_dimensions:
+      LoadBalancer: app/agri-platform-alb/*
+    period_seconds: 60
+    range_seconds: 300
+    set_timestamp: false
+    metric_descriptors:
+      - dimensions:
+          - LoadBalancer
+        name: alb_target_response_time
+
+  - aws_namespace: AWS/ApplicationELB
+    aws_metric_name: HealthyHostCount
+    aws_dimensions:
+      LoadBalancer: app/agri-platform-alb/*
+    period_seconds: 60
+    range_seconds: 300
+    set_timestamp: false
+    metric_descriptors:
+      - dimensions:
+          - LoadBalancer
+        name: alb_healthy_host_count
+
+  - aws_namespace: AWS/ApplicationELB
+    aws_metric_name: UnHealthyHostCount
+    aws_dimensions:
+      LoadBalancer: app/agri-platform-alb/*
+    period_seconds: 60
+    range_seconds: 300
+    set_timestamp: false
+    metric_descriptors:
+      - dimensions:
+          - LoadBalancer
+        name: alb_unhealthy_host_count

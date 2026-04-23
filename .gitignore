@@ -1,0 +1,42 @@
+# Terraform
+*.tfstate
+*.tfstate.*
+*.tfvars
+!terraform.tfvars.example
+.terraform/
+.terraform.lock.hcl
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Docker
+*.dockerfile
+docker-compose.override.yml
+
+# Django
+*.py[cod]
+__pycache__/
+*.egg-info/
+dist/
+build/
+.env
+.venv
+env/
+venv/
+ENV/
+*.sqlite3
+*.db
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+logs/
+*.log

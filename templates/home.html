@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="home-container">
+    <h1>Welcome to Agriculture Platform</h1>
+    <p>Explore market prices and agricultural data</p>
+    <a href="{% url 'market:index' %}">View Market Prices</a>
+</div>
+{% endblock %}
