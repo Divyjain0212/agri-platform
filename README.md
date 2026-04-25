@@ -523,14 +523,6 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file for
 
 ---
 
-## 👥 Team
-
-- **Architecture**: Cloud-Native High-Availability Design
-- **Tech Stack**: Django + PostgreSQL + AWS + Terraform
-- **Deployment**: Jenkins CI/CD Pipeline
-
----
-
 ## 📞 Support
 
 For issues or questions:
