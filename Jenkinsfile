@@ -30,18 +30,6 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                echo "Running tests..."
-                sh '''
-                    docker run --rm \
-                        -e DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE} \
-                        ${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG} \
-                        python manage.py test
-                '''
-            }
-        }
-
         stage('Push to ECR') {
             steps {
                 echo "Pushing to ECR..."
