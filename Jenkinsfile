@@ -47,13 +47,17 @@ pipeline {
         stage('Deploy to ECS') {
             steps {
                 echo "Deploying to ECS..."
-                sh '''
-                    aws ecs update-service \
-                        --cluster agri-platform-cluster \
-                        --service agri-platform-service \
-                        --force-new-deployment \
-                        --region ${AWS_REGION}
-                '''
+                script {
+                    withAWS(region: 'ap-south-1', credentials: 'aws-credentials') {
+                        sh '''
+                            aws ecs update-service \
+                                --cluster agri-platform-cluster \
+                                --service agri-platform-service \
+                                --force-new-deployment \
+                                --region ${AWS_REGION}
+                        '''
+                    }
+                }
             }
         }
     }
