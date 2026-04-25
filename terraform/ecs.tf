@@ -72,7 +72,8 @@ resource "aws_iam_role_policy" "ecs_task_execution_secrets" {
           "secretsmanager:GetSecretValue"
         ]
         Resource = [
-          aws_secretsmanager_secret.db_password.arn
+          aws_secretsmanager_secret.db_password.arn,
+          aws_secretsmanager_secret.django_superuser_password.arn
         ]
       }
     ]
@@ -92,6 +93,28 @@ resource "aws_iam_role" "ecs_task_role" {
         Principal = {
           Service = "ecs-tasks.amazonaws.com"
         }
+      }
+    ]
+  })
+}
+
+# Add Secrets Manager access to task role (for runtime credential fetching)
+resource "aws_iam_role_policy" "ecs_task_secrets" {
+  name = "${var.project_name}-ecs-task-secrets"
+  role = aws_iam_role.ecs_task_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "secretsmanager:GetSecretValue"
+        ]
+        Resource = [
+          aws_secretsmanager_secret.db_password.arn,
+          aws_secretsmanager_secret.django_superuser_password.arn
+        ]
       }
     ]
   })
@@ -151,12 +174,32 @@ resource "aws_ecs_task_definition" "app" {
         {
           name  = "ALLOWED_HOSTS"
           value = aws_lb.main.dns_name
+        },
+        {
+          name  = "DJANGO_SUPERUSER_USERNAME"
+          value = var.django_superuser_username
+        },
+        {
+          name  = "DJANGO_SUPERUSER_EMAIL"
+          value = var.django_superuser_email
+        },
+        {
+          name  = "AWS_REGION"
+          value = var.aws_region
+        },
+        {
+          name  = "PROJECT_NAME"
+          value = var.project_name
         }
       ]
       secrets = [
         {
           name      = "DB_PASSWORD"
           valueFrom = aws_secretsmanager_secret.db_password.arn
+        },
+        {
+          name      = "DJANGO_SUPERUSER_PASSWORD"
+          valueFrom = aws_secretsmanager_secret.django_superuser_password.arn
         }
       ]
       logConfiguration = {

@@ -22,4 +22,9 @@ max_capacity = 10
 
 db_instance_class = "db.t3.micro"
 db_username       = "agriuser"
-db_password       = "Div#321jain" 
+db_password       = "password"
+
+# Django superuser credentials for admin panel access
+django_superuser_username = "admin"
+django_superuser_email    = "admin@agri-platform.com"
+django_superuser_password = "ChangeMe@123" # Change this to a strong password 

@@ -42,7 +42,7 @@ This platform addresses the challenge of market price accessibility for farmers 
 
 ```
 ┌─────────────────────────────────────────┐
-│         Internet Users                   │
+│         Internet Users                  │
 └──────────────────┬──────────────────────┘
                    │
         ┌──────────▼──────────────┐
@@ -54,18 +54,17 @@ This platform addresses the challenge of market price accessibility for farmers 
       ┌────────────┴────────────┐
       │                         │
 ┌─────▼────┐           ┌────────▼────┐
-│   ECS     │           │    ECS      │
-│  Fargate  │           │  Fargate    │
-│  Tasks    │           │  Tasks      │
-│  (AZ-1a)  │           │  (AZ-1b)    │
+│   ECS    │           │    ECS      │
+│  Fargate │           │  Fargate    │
+│  Tasks   │           │  Tasks      │
+│  (AZ-1a) │           │  (AZ-1b)    │
 └─────┬────┘           └────────┬────┘
       │                         │
       └────────────┬────────────┘
                    │
         ┌──────────▼──────────┐
         │   PostgreSQL RDS    │
-        │   Multi-AZ (Hot     │
-        │   Standby)          │
+        │   Multi-AZ          │
         └─────────────────────┘
 ```
 
@@ -95,7 +94,6 @@ This platform addresses the challenge of market price accessibility for farmers 
 ### Infrastructure Features
 - ✅ **High Availability** - Multi-AZ deployment
 - ✅ **Auto-Scaling** - Scale based on CPU (70%) & Memory (80%)
-- ✅ **SSL/TLS Ready** - AWS Certificate Manager integration
 - ✅ **CloudWatch Integration** - Complete observability
 - ✅ **Infrastructure as Code** - Terraform for reproducibility
 - ✅ **Automated CI/CD** - Jenkins pipeline
@@ -106,10 +104,9 @@ This platform addresses the challenge of market price accessibility for farmers 
 
 ### Prerequisites
 
-- Python 3.11+
+- Python 3.13+
 - Docker (for containerization)
 - AWS Account (for deployment)
-- Terraform >= 1.0 (for IaC)
 - Git
 
 ### Local Development Setup

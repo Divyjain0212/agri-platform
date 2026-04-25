@@ -12,13 +12,12 @@ resource "aws_db_subnet_group" "main" {
 resource "aws_db_instance" "main" {
   identifier     = "${var.project_name}-db"
   engine         = "postgres"
-  engine_version = "15.4"
+  engine_version = "17"
   instance_class = var.db_instance_class
 
   allocated_storage = 20
   storage_type      = "gp3"
   storage_encrypted = true
-  iops              = 3000
 
   db_name  = "agridb"
   username = var.db_username
@@ -32,7 +31,7 @@ resource "aws_db_instance" "main" {
   skip_final_snapshot       = false
   final_snapshot_identifier = "${var.project_name}-final-snapshot-${formatdate("YYYY-MM-DD-hhmm", timestamp())}"
 
-  backup_retention_period = 30
+  backup_retention_period = 1
   backup_window           = "03:00-04:00"
   maintenance_window      = "mon:04:00-mon:05:00"
 

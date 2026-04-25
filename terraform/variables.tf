@@ -81,3 +81,22 @@ variable "db_password" {
   sensitive   = true
   description = "Database master password"
 }
+
+variable "django_superuser_username" {
+  type        = string
+  default     = "admin"
+  sensitive   = false
+  description = "Django superuser username for admin panel access"
+}
+
+variable "django_superuser_email" {
+  type        = string
+  sensitive   = false
+  description = "Django superuser email"
+}
+
+variable "django_superuser_password" {
+  type        = string
+  sensitive   = true
+  description = "Django superuser password for admin panel access"
+}
